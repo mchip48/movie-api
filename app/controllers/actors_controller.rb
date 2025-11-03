@@ -2,22 +2,38 @@ class ActorsController < ApplicationController
 
   def index
     @actors = Actor.all 
-    render json: @actors
+    render template: "actors/index"
   end
 
-  # def show
+  def show
+    @actor = Actor.find(params[:id])
+    render template: "actors/show"
+  end
 
-  # end
+  def create
+    @actor = Actor.create(
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      known_for: params[:known_for]
+    )
+    render template: "actors/show"
+  end
 
-  # def create
+  def update
+    @actor = Actor.find(params[:id])
+    @actor.update(
+      first_name: params[:first_name] || @actor.first_name,
+      last_name: params[:last_name] || @actor.last_name,
+      known_for: params[:known_for] || @actor.known_for
+    )
+    render template: "actors/show"
+  end
 
-  # end
+  def destroy
+    @actor = Actor.find(params[:id])
+    @actor.destroy
 
-  # def update
+    render json: { message: "Actor was deleted..."}
+  end
 
-  # end
-
-  # def destroy
-
-  # end
 end
