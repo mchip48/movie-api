@@ -18,19 +18,29 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
+
     assert_difference "Actor.count", 1 do
       post "/actors.json", params: { first_name: "Matthew", last_name: "Chipkin", known_for: "Actualize" }
       assert_response 200
     end
+    
+    assert_difference "Actor.count", 0 do
+      post "/actors.json", params: {}
+      assert_response 422
+    end
   end
 
   test "update" do
+
     actor = Actor.first
     patch "/actors/#{actor.id}.json", params: { first_name: "Updated First Name" }
     assert_response 200
 
     data = JSON.parse(response.body)
     assert_equal "Updated First Name", data["first_name"]
+
+    patch "/actors/#{actor.id}.json", params: { first_name: "" }
+    assert_response 422
   end
 
   test "destroy" do

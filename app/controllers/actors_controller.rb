@@ -16,8 +16,11 @@ class ActorsController < ApplicationController
       last_name: params[:last_name],
       known_for: params[:known_for]
     )
-    actor.save
-    render template: "actors/show"
+    if @actor.save
+      render :show, status: 200 #:created? ask leon about this
+    else
+      render json: { errors: @actor.errors}, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -27,7 +30,12 @@ class ActorsController < ApplicationController
       last_name: params[:last_name] || @actor.last_name,
       known_for: params[:known_for] || @actor.known_for
     )
-    render template: "actors/show"
+
+    if @actor.valid?
+      render :show
+    else
+      render json: { errors: @actor.errors }, status: :unprocessable_entity
+    end
   end
 
   def destroy
