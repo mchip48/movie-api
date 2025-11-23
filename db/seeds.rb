@@ -13,9 +13,9 @@ Movie.delete_all!
 
 actors = [
   {
-    first_name: "Jeff",
-    last_name: "Bridges",
-    known_for: "The Big Lebowski"
+    first_name: "Denzel",
+    last_name: "Washington",
+    known_for: "Fences"
   },
   {
     first_name: "Viola",
