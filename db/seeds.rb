@@ -8,15 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Actor.delete_all!
-Movie.delete_all!
+Actor.delete_all
+Movie.delete_all
 
-movie1 = [{title: "Fences", year: 2016, plot: "Fences and Love"}]
-movie2 = [{title: "Eternal Sunshine of the Spotless Mind", year: 2004, plot: "Memory and Love"}]
-
-movies.each do |movie|
-  Movie.create!(movie)
-end
+movie1 = Movie.create!(title: "Fences", year: 2016, plot: "Fences and Love")
+movie2 = Movie.create!(title: "Eternal Sunshine of the Spotless Mind", year: 2004, plot: "Memory and Love")
 
 actors = [
   {
