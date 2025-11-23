@@ -48,4 +48,5 @@ class ActorsController < ApplicationController
   def actor_params
     params.require(:actor).permit(:first_name, :last_name, :known_for, :movie_id)
   end
+  
 end
