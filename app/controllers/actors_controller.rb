@@ -17,7 +17,7 @@ class ActorsController < ApplicationController
       known_for: params[:known_for]
     )
     if @actor.save
-      render :show, status: 200 #:created? ask leon about this
+      render :show, status: :created
     else
       render json: { errors: @actor.errors}, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class ActorsController < ApplicationController
     )
 
     if @actor.valid?
-      render :show
+      render :show, status: 
     else
       render json: { errors: @actor.errors }, status: :unprocessable_entity
     end

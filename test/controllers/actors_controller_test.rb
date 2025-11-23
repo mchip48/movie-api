@@ -21,7 +21,7 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference "Actor.count", 1 do
       post "/actors.json", params: { first_name: "Matthew", last_name: "Chipkin", known_for: "Actualize" }
-      assert_response 200
+      assert_response 201
     end
     
     assert_difference "Actor.count", 0 do
