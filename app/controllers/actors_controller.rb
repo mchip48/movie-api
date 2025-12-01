@@ -2,12 +2,12 @@ class ActorsController < ApplicationController
 
   def index
     @actors = Actor.all 
-    render template: "actors/index"
+    render json: @actors
   end
 
   def show
     @actor = Actor.find(params[:id])
-    render template: "actors/show"
+    render json: @actor
   end
 
   def create
@@ -17,9 +17,9 @@ class ActorsController < ApplicationController
       known_for: params[:known_for]
     )
     if @actor.save
-      render :show, status: :created
+      render json: @actor, status: :created
     else
-      render json: { errors: @actor.errors}, status: :unprocessable_entity
+      render json: { errors: @actor.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -32,9 +32,9 @@ class ActorsController < ApplicationController
     )
 
     if @actor.valid?
-      render :show, status: 
+      render json: @actor
     else
-      render json: { errors: @actor.errors }, status: :unprocessable_entity
+      render json: { errors: @actor.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -43,10 +43,6 @@ class ActorsController < ApplicationController
     @actor.destroy
 
     render json: { message: "Actor was deleted..."}
-  end
-
-  def actor_params
-    params.require(:actor).permit(:first_name, :last_name, :known_for)
   end
   
 end
