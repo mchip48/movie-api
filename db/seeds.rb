@@ -32,6 +32,12 @@ actors = [
     last_name: "Winslet",
     known_for: "Eternal Sunshine of the Spotless Mind",
     movie_id: movie2.id
+  },
+  {
+    first_name: "Jim",
+    last_name: "Carrey",
+    known_for: "Eternal Sunshine of the Spotless Mind",
+    movie_id: movie2.id
   }
 ]
 
