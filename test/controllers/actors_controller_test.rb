@@ -10,6 +10,8 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "show" do
+    post "/users.json", params: { name: "Test", email: "test@email.com", password: "password", password_confirmation: "password" }
+    post "/sessions.json", params: { email: "test@email.com", password: "password" }
     get "/actors/#{Actor.first.id}.json"
     assert_response 200
 
@@ -18,8 +20,9 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create" do
-
     assert_difference "Actor.count", 1 do
+      post "/users.json", params: { name: "Test", email: "test@email.com", password: "password", password_confirmation: "password" }
+      post "/sessions.json", params: { email: "test@email.com", password: "password" }
       post "/actors.json", params: { first_name: "Matthew", last_name: "Chipkin", known_for: "Actualize"}
       assert_response 201
     end
@@ -31,7 +34,8 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "update" do
-
+    post "/users.json", params: { name: "Test", email: "test@email.com", password: "password", password_confirmation: "password" }
+    post "/sessions.json", params: { email: "test@email.com", password: "password" }
     actor = Actor.first
     patch "/actors/#{actor.id}.json", params: { first_name: "Updated First Name" }
     assert_response 200
@@ -45,6 +49,8 @@ class ActorsControllerTest < ActionDispatch::IntegrationTest
 
   test "destroy" do
     assert_difference "Actor.count", -1 do
+      post "/users.json", params: { name: "Test", email: "test@email.com", password: "password", password_confirmation: "password" }
+      post "/sessions.json", params: { email: "test@email.com", password: "password" }
       delete "/actors/#{Actor.first.id}.json"
       assert_response 200
     end
