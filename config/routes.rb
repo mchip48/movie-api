@@ -29,4 +29,10 @@ Rails.application.routes.draw do
   # routes for users controller CRUD actions
 
   post "/users" => "users#create"
+
+  #routes for sessions controller CRUD actions
+
+  post "/sessions" => "sessions#create"
+  delete "/sessions" => "sessions#destroy"
+  
 end
